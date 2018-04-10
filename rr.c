@@ -32,7 +32,9 @@
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
 void rr(){
-	printf("RR입니다. \n");
+	char tn[] = "Round Robine";
+	startLog(tn);
+	endLog(tn);
 }
 
 

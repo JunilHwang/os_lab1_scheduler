@@ -12,20 +12,30 @@
 
 #ifndef _LAB1_HEADER_H
 #define _LAB1_HEADER_H
+#define SIZE 5	// process size
 
+// struct task
 struct task_t{
 	char name;	// process name
 	int arv,	// Arrival time
 		svc;	// Service time
 };
-int queue[5];	// queue
-void q_pop();	// queue pop
-void q_put();	// queue put
-struct task_t task[5];	// task info
+
+// global variable
+struct task_t *queue[SIZE],	// queue
+			   task[SIZE];	// task
+int q_top = 0,	//queue top position
+	q_last = 0;	//queue last position
+
+// default functions
+struct task_t *q_pop();	// queue pop
+void q_put(struct task_t *);	// queue put
+void q_check();
 void taskSet();	// task setting
 void startLog(char *);
 void endLog(char *);
 
+// scheduling functions
 void fifo();	// first in first out
 void sjf();		// shortest job first
 void rr();		// round robine

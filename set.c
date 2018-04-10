@@ -39,6 +39,25 @@ void endLog(char *name){
 	printf("end \t %s \t ---------- \n\n",name);
 }
 
+void q_check(){
+	if(q_top == q_last)
+		q_top = q_last = 0;
+}
+
+struct task_t *q_pop(){
+	struct task_t *task_top = queue[q_top];
+	queue[q_top] = NULL;
+	if(++q_top >= SIZE) q_top = 0;
+	q_check();
+	return task_top;
+}
+
+void q_put(struct task_t* task_one){
+	if(++q_last >= SIZE) q_last = 0;
+	q_check();
+	queue[q_last] = task_one;
+}
+
 void taskSet(){
 	char taskName[] = "taskSet";
 	//start log print
@@ -49,7 +68,7 @@ void taskSet(){
 		svc[] = {3,6,4,5,2},
 		i;
 	
-	for(i=0;i<5;i++){
+	for(i=0;i<SIZE;i++){
 		task[i].name = name[i];
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];
