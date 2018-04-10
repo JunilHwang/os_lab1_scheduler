@@ -33,12 +33,8 @@
  */
 
 
-void sched(){
-	fifo();
-	sjf();
-	rr();
-	mlfq();
-	lottery();
+void fifo(){
+	printf("fifo 입니다\n");
 }
 
 

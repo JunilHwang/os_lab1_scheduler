@@ -32,13 +32,9 @@
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
 
-
-void sched(){
-	fifo();
-	sjf();
-	rr();
-	mlfq();
-	lottery();
+void lottery(){
+	printf("lottery 입니다.\n");
 }
+
 
 

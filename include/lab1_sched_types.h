@@ -18,6 +18,11 @@
  * You need to Declare functions in  here
  */
 
+void fifo();
+void sjf();
+void rr();
+void mlfq();
+void lottery();
 
 #endif /* LAB1_HEADER_H*/
 
