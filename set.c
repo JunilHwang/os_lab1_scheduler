@@ -31,16 +31,16 @@
 /*
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
-char taskName[] = "taskSet";
 void startLog(char *name){
-	printf("start \t %s \t ---------- \n",name);
+	printf("\nstart \t %s \t ---------- \n",name);
 }
 
 void endLog(char *name){
-	printf("end \t %s \t ---------- \n",name);
+	printf("end \t %s \t ---------- \n\n",name);
 }
 
 void taskSet(){
+	char taskName[] = "taskSet";
 	//start log print
 	startLog(taskName);
 

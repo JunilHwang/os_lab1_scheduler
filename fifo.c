@@ -32,9 +32,13 @@
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
 
-
 void fifo(){
-	printf("fifo 입니다\n");
+	char *taskName = "fifo";
+	startLog(taskName);
+
+	printf("fifo 관련 실행\n");
+
+	endLog(taskName);
 }
 
 

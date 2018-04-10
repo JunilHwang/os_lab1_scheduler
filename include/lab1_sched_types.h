@@ -16,7 +16,7 @@
 struct task_t{
 	char name;	// process name
 	int arv,	// Arrival time
-		svc;	// Sergice time
+		svc;	// Service time
 };
 int queue[5];	// queue
 void q_pop();	// queue pop
