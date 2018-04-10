@@ -37,7 +37,7 @@ void sched(){
 	taskSet();
 	fifo();
 	sjf();
-	rr();
+	rr(1);
 	mlfq();
 	lottery();
 }

@@ -24,8 +24,7 @@ struct task_t{
 // global variable
 struct task_t *queue[SIZE],	// queue
 			   task[SIZE];	// task
-int q_top = 0,	//queue top position
-	q_last = 0;	//queue last position
+int qt, ql;  //queue top, last position
 
 // default functions
 struct task_t *q_pop();	// queue pop
@@ -34,11 +33,13 @@ void q_check();
 void taskSet();	// task setting
 void startLog(char *);
 void endLog(char *);
+void endl();
+void print_queue();
 
 // scheduling functions
 void fifo();	// first in first out
 void sjf();		// shortest job first
-void rr();		// round robine
+void rr(int);		// round robine
 void mlfq();	// Multi level feedback queue
 void lottery();	// lottery
 

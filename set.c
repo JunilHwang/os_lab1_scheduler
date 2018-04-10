@@ -39,23 +39,37 @@ void endLog(char *name){
 	printf("end \t %s \t ---------- \n\n",name);
 }
 
+void endl(){
+	printf("\n");
+}
+
 void q_check(){
-	if(q_top == q_last)
-		q_top = q_last = 0;
+	if(qt == ql)
+		qt = ql = 0;
 }
 
 struct task_t *q_pop(){
-	struct task_t *task_top = queue[q_top];
-	queue[q_top] = NULL;
-	if(++q_top >= SIZE) q_top = 0;
+	struct task_t *task_top = queue[qt];
+	queue[qt] = NULL;
+	if(++qt >= SIZE) qt = 0;
 	q_check();
 	return task_top;
 }
 
 void q_put(struct task_t* task_one){
-	if(++q_last >= SIZE) q_last = 0;
+	queue[ql] = task_one;
+	if(++ql >= SIZE) ql = 0;
 	q_check();
-	queue[q_last] = task_one;
+}
+
+void print_queue(){
+	int i=0;
+	endl();
+	for(;i<SIZE;i++){
+		if(queue[i] == NULL) continue;
+		printf("i:%d,name:%c,svc:%d\t",i,queue[i]->name,queue[i]->svc);
+	}
+	endl();
 }
 
 void taskSet(){
@@ -64,11 +78,12 @@ void taskSet(){
 	startLog(taskName);
 
 	char name[] = "abcde";
-	int arv[] = {2,4,6,8,10},
+	int arv[] = {0,2,4,6,8},
 		svc[] = {3,6,4,5,2},
 		i;
-	
+	qt = ql = 0;
 	for(i=0;i<SIZE;i++){
+		queue[i] = NULL;
 		task[i].name = name[i];
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];

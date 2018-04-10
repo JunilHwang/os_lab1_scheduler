@@ -33,12 +33,12 @@
  */
 
 void fifo(){
-	char *taskName = "fifo";
-	startLog(taskName);
+	char tn[] = "fifo";
+	startLog(tn);
 
 	printf("fifo 관련 실행\n");
 
-	endLog(taskName);
+	endLog(tn);
 }
 
 
