@@ -31,14 +31,34 @@
 /*
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
+/*
+void rr(int test){
+	printf("%d\n",test);
+}
+*/
 
 void fifo(){
-	char tn[] = "fifo";
+	taskSet();
+	char tn[] = "First in First out\0";
+	int i = 0,
+		killed_count = 0,
+		svc_t = 0,
+		next = 0;
+	struct task_t *now = &task[next++];
 	startLog(tn);
+	while(killed_count < SIZE){
+		svc_t++;
+		if(next<SIZE && task[next].arv <= svc_t){
+			q_put(&task[next++]);
+		}
+		printf("%c ",now->name);
+		if(--now->svc <= 0){
+			killed_count++;
+			now = q_pop();
+		}
+	}
 
-	printf("fifo 관련 실행\n");
+	printf("\n");
 
 	endLog(tn);
 }
-
-

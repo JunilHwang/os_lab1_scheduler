@@ -73,11 +73,8 @@ void print_queue(){
 }
 
 void taskSet(){
-	char taskName[] = "taskSet";
-	//start log print
-	startLog(taskName);
 
-	char name[] = "abcde";
+	char name[] = "abcde\0";
 	int arv[] = {0,2,4,6,8},
 		svc[] = {3,6,4,5,2},
 		i;
@@ -87,14 +84,12 @@ void taskSet(){
 		task[i].name = name[i];
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];
-		printf("name : %c, arrival Time : %d, service Time : %d\n",
-				task[i].name,
-				task[i].arv,
-				task[i].svc);
+		//printf("name : %c, arrival Time : %d, service Time : %d\n",
+		//		task[i].name,
+		//		task[i].arv,
+		//		task[i].svc);
 	}
 
-	//end log print
-	endLog(taskName);
 }
 
 

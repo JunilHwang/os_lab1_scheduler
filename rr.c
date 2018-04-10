@@ -38,7 +38,8 @@ void rr(int test){
 */
 
 void rr(int max_sched_cnt){
-	char tn[] = "Round Robine";
+	taskSet();
+	char tn[] = "Round Robine\0";
 	int i = 0,
 		kill_count = 0,
 		svc_t = 0,
@@ -55,7 +56,7 @@ void rr(int max_sched_cnt){
 			q_put(&task[next++]);
 		}
 
-		printf("%c%d ",now->name,now->svc);
+		printf("%c ",now->name);
 		if(--now->svc <= 0){
 			kill_count++;
 		} else {
