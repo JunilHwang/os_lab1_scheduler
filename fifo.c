@@ -34,10 +34,40 @@
 
 void fifo(){
 	char tn[] = "fifo";
+	int allTurnaroundTime;
+	int i,j;
+	int t;
+	struct task_t *ttask;
 	startLog(tn);
 
 	printf("fifo 관련 실행\n");
 
+	taskSet();
+	
+	for(i=0;i<SIZE;i++){
+		allTurnaroundTime+=task[i].svc;
+	}
+	printf("%d", allTurnaroundTime);
+/*	for(t=0;t<allTurnaroundTime;t++)
+	{
+		printf("%d",t);
+	for(i=0;i<SIZE;i++){
+		if(task[i].arv==t)
+		{
+			t++;
+			printf("%d",t);
+			for(j=0;task[i].svc;j++){
+			q_put(&task[i]);
+			ttask=q_pop();
+			printf("%c", ttask->name);
+	
+			}
+		}
+		
+	}
+	}
+	print_queue();
+*/
 	endLog(tn);
 }
 
