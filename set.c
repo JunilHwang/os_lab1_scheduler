@@ -44,8 +44,8 @@ void endl(){
 }
 
 void q_check(){
-	if(qt == ql)
-		qt = ql = 0;
+	//if(qt == ql)
+	//	qt = ql = 0;
 }
 
 struct task_t *q_pop(){
@@ -64,11 +64,11 @@ void q_put(struct task_t* task_one){
 
 void print_queue(){
 	int i=0;
-	endl();
 	for(;i<SIZE;i++){
 		if(queue[i] == NULL) continue;
-		printf("i:%d,name:%c,svc:%d\t",i,queue[i]->name,queue[i]->svc);
+		printf("i:%d,name:%c,svc:%d\n",i,queue[i]->name,queue[i]->svc);
 	}
+	printf("top:%d, last:%d\n",qt,ql);
 	endl();
 }
 
