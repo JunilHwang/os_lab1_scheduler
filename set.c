@@ -31,15 +31,36 @@
 /*
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
+char taskName[] = "taskSet";
+void startLog(char *name){
+	printf("start \t %s \t ---------- \n",name);
+}
 
+void endLog(char *name){
+	printf("end \t %s \t ---------- \n",name);
+}
 
-void sched(){
-	taskSet();
-	fifo();
-	sjf();
-	rr();
-	mlfq();
-	lottery();
+void taskSet(){
+	//start log print
+	startLog(taskName);
+
+	char name[] = "abcde";
+	int arv[] = {2,4,6,8,10},
+		svc[] = {3,6,4,5,2},
+		i;
+	
+	for(i=0;i<5;i++){
+		task[i].name = name[i];
+		task[i].arv = arv[i];
+		task[i].svc = svc[i];
+		printf("name : %c, arrival Time : %d, service Time : %d\n",
+				task[i].name,
+				task[i].arv,
+				task[i].svc);
+	}
+
+	//end log print
+	endLog(taskName);
 }
 
 

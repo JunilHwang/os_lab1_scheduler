@@ -12,7 +12,7 @@ CC = gcc
 INC = -I${CURDIR}/include/
 CFLAGS = -g $(INC)
 
-OBJS_LAB1 = fifo.o sjf.o rr.o mlfq.o lottery.o lab1_sched.o lab1_sched_test.o 
+OBJS_LAB1 = fifo.o sjf.o rr.o mlfq.o lottery.o lab1_sched.o lab1_sched_test.o set.o
 
 SRCS = $(OBJS_LAB1:.o=.c)
 
