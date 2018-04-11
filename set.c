@@ -57,7 +57,20 @@ struct task_t *q_pop(){
 }
 
 void q_put(struct task_t* task_one){
+	int now=ql, prev;
+	struct task_t* temp;
 	queue[ql] = task_one;
+	while(1){
+		prev = now-1;
+		if(prev < 0) now = SIZE-1;
+		if(!queue[prev] || queue[prev]->prt == queue[now]->prt || prev == qt) break;
+		if(queue[prev]->prt > queue[now]->prt){
+			temp = queue[now];
+			queue[now] = queue[prev];
+			queue[prev] = temp;
+		}
+		now = prev;
+	}
 	if(++ql >= SIZE) ql = 0;
 	q_check();
 }
@@ -84,10 +97,12 @@ void taskSet(){
 		task[i].name = name[i];
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];
-		//printf("name : %c, arrival Time : %d, service Time : %d\n",
-		//		task[i].name,
-		//		task[i].arv,
-		//		task[i].svc);
+		task[i].prt = 0;
+		printf("name : %c, arrival Time : %d, service Time : %d, priority : %d\n",
+				task[i].name,
+				task[i].arv,
+				task[i].svc,
+				task[i].prt);
 	}
 
 }

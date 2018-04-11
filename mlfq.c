@@ -34,6 +34,32 @@
 
 
 void mlfq(){
-	printf("mlfq 입니다.\n");
+	taskSet();
+	char tn[] = "Multi Level Feedback Queue\0";
+	int i = 0,
+		kill_count = 0,
+		svc_t = 0,
+		next = 0;
+	struct task_t *now = &task[next++];
+	startLog(tn);
+	q_put(now);
+	while(kill_count < SIZE){
+		if(next<SIZE && task[next].arv <= svc_t){
+			now = &task[next++];
+		} else {
+			now = q_pop();
+		}
+		svc_t++;
+		now->prt++;
+		printf("%c ",now->name);
+
+		if(--now->svc <= 0){
+			kill_count++;
+		} else {
+			q_put(now);
+		}
+	}
+	printf("\n");
+	endLog(tn);
 }
 

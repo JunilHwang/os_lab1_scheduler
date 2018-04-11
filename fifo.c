@@ -46,6 +46,7 @@ void fifo(){
 		next = 0;
 	struct task_t *now = &task[next++];
 	startLog(tn);
+
 	while(killed_count < SIZE){
 		svc_t++;
 		if(next<SIZE && task[next].arv <= svc_t){

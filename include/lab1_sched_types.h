@@ -18,7 +18,8 @@
 struct task_t{
 	char name;	// process name
 	int arv,	// Arrival time
-		svc;	// Service time
+		svc,	// Service time
+		prt;	// Priority
 };
 
 // global variable

@@ -34,7 +34,6 @@
 
 
 void sched(){
-	taskSet();
 	fifo();
 	sjf();
 	rr(1);
