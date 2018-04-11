@@ -31,11 +31,6 @@
 /*
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
-/*
-void rr(int test){
-	printf("%d\n",test);
-}
-*/
 
 void fifo(){
 	taskSet();

@@ -47,9 +47,7 @@ void rr(int max_sched_cnt){
 		sched_cnt = 0;
 	struct task_t *now = &task[next++];
 	startLog(tn);
-	q_put(now);
 	while(kill_count < SIZE){
-		now = q_pop();
 		svc_t++;
 
 		if(next<SIZE && task[next].arv <= svc_t){
@@ -59,9 +57,14 @@ void rr(int max_sched_cnt){
 		printf("%c ",now->name);
 		if(--now->svc <= 0){
 			kill_count++;
+			sched_cnt = 0;
+			now = q_pop();
 		} else {
-			q_put(now);
-			if(++sched_cnt >= max_sched_cnt) sched_cnt = 0;
+			if(++sched_cnt >= max_sched_cnt){
+				sched_cnt = 0;
+				q_put(now);
+				now = q_pop();
+			}
 		}
 	}
 	printf("\n");

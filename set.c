@@ -60,6 +60,8 @@ void q_put(struct task_t* task_one){
 	int now=ql, prev;
 	struct task_t* temp;
 	queue[ql] = task_one;
+
+	// order by priority 
 	while(1){
 		prev = now-1;
 		if(prev < 0) now = SIZE-1;
@@ -106,5 +108,4 @@ void taskSet(){
 	}
 
 }
-
 

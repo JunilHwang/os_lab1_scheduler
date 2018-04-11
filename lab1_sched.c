@@ -37,6 +37,7 @@ void sched(){
 	fifo();
 	sjf();
 	rr(1);
+	rr(4);
 	mlfq();
 	lottery();
 }
