@@ -73,6 +73,7 @@ void q_put(struct task_t* task_one){
 // print queue
 void print_queue(){
 	int i=0;
+    endl();
 	for(;i<SIZE;i++){
 		if(queue[i] == NULL) continue;
 		printf("i:%d,name:%c,svc:%d\n",i,queue[i]->name,queue[i]->svc);

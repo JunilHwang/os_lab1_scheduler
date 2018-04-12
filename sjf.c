@@ -33,7 +33,28 @@
  */
 
 void sjf(){
-	printf("sjf입니다. \n");
+	taskSet(); taskPrint();
+	char tn[] = "Shortest job first\0";
+	int	killed_count = 0,
+		svc_t = 0,
+		next = 0;
+	struct task_t *now= &task[next++];
+	startLog(tn);
+	while(killed_count < SIZE){
+		printf("%c %d ",now->name,svc_t);
+		svc_t++;
+		if(next<SIZE && task[next].arv <= svc_t){
+			q_put(&task[next]);
+            next++;
+		}
+        now->svc--;
+		if(now->svc == 0){
+			killed_count++;
+			now = q_pop();
+		}
+	}
+    endl();
+	endLog(tn);
 }
 
 

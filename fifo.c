@@ -35,20 +35,23 @@
 void fifo(){
 	taskSet(); taskPrint();
 	char tn[] = "First in First out\0";
-	int i = 0,
-		killed_count = 0,
+	int	killed_count = 0,
 		svc_t = 0,
 		next = 0;
-	struct task_t *now = &task[next++];
+	struct task_t *now= &task[next++];
 	startLog(tn);
-
 	while(killed_count < SIZE){
+		printf("%c %d ",now->name,svc_t);
 		svc_t++;
+        if(next<SIZE)
+            printf("\nnext:%c, next arrival time : %d, now service time:%d\n",task[next].name,task[next].arv,svc_t);
+        print_queue();
 		if(next<SIZE && task[next].arv <= svc_t){
-			q_put(&task[next++]);
+			q_put(&task[next]);
+            next++;
 		}
-		printf("%c ",now->name);
-		if(--now->svc <= 0){
+        now->svc--;
+		if(now->svc == 0){
 			killed_count++;
 			now = q_pop();
 		}
