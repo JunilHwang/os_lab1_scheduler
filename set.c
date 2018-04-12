@@ -1,12 +1,8 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
 *
-*   lab1_sched.c :
-*       - Lab1 source file.
-*       - Must contains scueduler algorithm function'definition.
+*   set.c : implement of default function 
 *
 */
 
@@ -28,34 +24,32 @@
 
 #include "lab1_sched_types.h"
 
-/*
- * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
- */
+// start log print
 void startLog(char *name){
-	printf("\nstart \t %s \t ---------- \n",name);
+	printf("\nstart \t %s\n",name);
+	printf("------------------------------ \n");
 }
 
+// end log print
 void endLog(char *name){
-	printf("end \t %s \t ---------- \n\n",name);
+	printf("------------------------------ \n");
+	printf("end \t %s\n\n",name);
 }
 
+// enter
 void endl(){
 	printf("\n");
 }
 
-void q_check(){
-	//if(qt == ql)
-	//	qt = ql = 0;
-}
-
+// queue pop
 struct task_t *q_pop(){
 	struct task_t *task_top = queue[qt];
 	queue[qt] = NULL;
 	if(++qt >= SIZE) qt = 0;
-	q_check();
 	return task_top;
 }
 
+// queue put
 void q_put(struct task_t* task_one){
 	int now=ql, prev;
 	struct task_t* temp;
@@ -74,9 +68,9 @@ void q_put(struct task_t* task_one){
 		now = prev;
 	}
 	if(++ql >= SIZE) ql = 0;
-	q_check();
 }
 
+// print queue
 void print_queue(){
 	int i=0;
 	for(;i<SIZE;i++){
@@ -87,8 +81,8 @@ void print_queue(){
 	endl();
 }
 
+// task array setting
 void taskSet(){
-
 	char name[] = "abcde\0";
 	int arv[] = {0,2,4,6,8},
 		svc[] = {3,6,4,5,2},
@@ -100,12 +94,15 @@ void taskSet(){
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];
 		task[i].prt = 0;
-		printf("name : %c, arrival Time : %d, service Time : %d, priority : %d\n",
-				task[i].name,
-				task[i].arv,
-				task[i].svc,
-				task[i].prt);
+		task[i].tk  = svc[i]*100;
 	}
 
 }
 
+// task array print
+void taskPrint(){
+	int i;
+	for(i=0;i<SIZE;i++){
+		printf("name : %c, arrival Time : %d, service Time : %d, priority : %d\n",task[i].name,task[i].arv,task[i].svc,task[i].prt);
+	}
+}

@@ -14,35 +14,41 @@
 #define _LAB1_HEADER_H
 #define SIZE 5	// process size
 
-// struct task
+// struct of task
 struct task_t{
 	char name;	// process name
 	int arv,	// Arrival time
 		svc,	// Service time
-		prt;	// Priority
+		prt,	// Priority
+		tk;		// ticket
 };
 
-// global variable
-struct task_t *queue[SIZE],	// queue
-			   task[SIZE];	// task
-int qt, ql;  //queue top, last position
+/* global variable { */
+struct task_t	*queue[SIZE],	// queue
+				task[SIZE];		// task
+int qt,	// queue top index
+	ql;	// queue last index
+/* } global variable */
 
-// default functions
-struct task_t *q_pop();	// queue pop
+/* default functions {
+	 will be implement in set.c */
+struct task_t *q_pop();			// queue pop
 void q_put(struct task_t *);	// queue put
-void q_check();
-void taskSet();	// task setting
-void startLog(char *);
-void endLog(char *);
-void endl();
-void print_queue();
+void taskSet();					// task array setting
+void taskPrint();				// task array  print
+void startLog(char *);			// start log print
+void endLog(char *);			// end log print
+void endl();					// enter character
+void print_queue();				// queue print
+/* } default functions */
 
-// scheduling functions
-void fifo();	// first in first out
-void sjf();		// shortest job first
-void rr(int);		// round robine
-void mlfq();	// Multi level feedback queue
-void lottery();	// lottery
+/* scheduling functions { */
+void fifo();	// implement at fifo.c	first in first out
+void sjf();		// implement at sjf.c	shortest job first
+void rr(int);	// implement at rr.c	round robine
+void mlfq();	// implement at mlfq.c	Multi level feedback queue
+void lottery();	// implement at lottery.c 
+/* } scheduling functions */
 
 
 #endif /* LAB1_HEADER_H*/

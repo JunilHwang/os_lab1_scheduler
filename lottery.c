@@ -1,12 +1,10 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32131766
+*	    Student name : junil hwang
 *
-*   lab1_sched.c :
-*       - Lab1 source file.
-*       - Must contains scueduler algorithm function'definition.
+*   lottery.c : implement source of lottery scheduling
 *
 */
 
@@ -33,8 +31,41 @@
  */
 
 void lottery(){
-	printf("lottery 입니다.\n");
+	char tn[] = "Lottery\0";
+	int i = 0,
+		kill_count = 0,
+		arv_cnt=1,
+		svc_t=0,
+		max, stack_tk, win_number;
+	taskSet();
+	startLog(tn);
+	srandom(time(NULL));
+	max = task[i].tk;
+	while(kill_count < SIZE){
+		svc_t++;
+		win_number = random() % max;
+		//printf("\nmax:%d,win:%d,",max,win_number);
+		for(i=stack_tk=0;i<arv_cnt;i++){
+			if(task[i].svc>0) stack_tk += task[i].tk;
+			if(win_number < stack_tk){
+				if(task[i].svc == 0) continue;
+				printf("%c ",task[i].name);
+				if(--task[i].svc<=0){
+					kill_count++;
+					max -= task[i].tk;
+				}
+				break;
+			}
+		}
+		for(i=arv_cnt;i<SIZE;i++){
+			if(task[i].arv <= svc_t){
+				max += task[i].tk;
+				arv_cnt++;
+			}
+		}
+
+	}
+	endl();
+	endLog(tn);
+
 }
-
-
-

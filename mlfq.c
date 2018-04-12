@@ -1,12 +1,10 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32131766
+*	    Student name : junil hwang
 *
-*   lab1_sched.c :
-*       - Lab1 source file.
-*       - Must contains scueduler algorithm function'definition.
+*   mlfq.c : implement Source of Multi Level Feedback Queue
 *
 */
 
@@ -25,14 +23,7 @@
 #include <assert.h>
 #include <pthread.h>
 #include <asm/unistd.h>
-
 #include "lab1_sched_types.h"
-
-/*
- * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
- */
-
-
 void mlfq(){
 	taskSet();
 	char tn[] = "Multi Level Feedback Queue\0";
@@ -52,14 +43,13 @@ void mlfq(){
 		svc_t++;
 		now->prt++;
 		printf("%c ",now->name);
-
 		if(--now->svc <= 0){
 			kill_count++;
 		} else {
 			q_put(now);
 		}
 	}
-	printf("\n");
+	endl();
 	endLog(tn);
 }
 

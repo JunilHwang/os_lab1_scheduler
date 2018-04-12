@@ -1,12 +1,10 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32131766
+*	    Student name : junil hwang
 *
-*   lab1_sched.c :
-*       - Lab1 source file.
-*       - Must contains scueduler algorithm function'definition.
+*   rr.c : implemen source of round robin
 *
 */
 
@@ -25,27 +23,20 @@
 #include <assert.h>
 #include <pthread.h>
 #include <asm/unistd.h>
-
 #include "lab1_sched_types.h"
-
-/*
- * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
- */
-/*
-void rr(int test){
-	printf("%d\n",test);
-}
-*/
 
 void rr(int max_sched_cnt){
 	taskSet();
-	char tn[] = "Round Robine\0";
+	char tn[20] = "Round Robin ",
+		 max[10];
 	int i = 0,
 		kill_count = 0,
 		svc_t = 0,
 		next = 0,
 		sched_cnt = 0;
 	struct task_t *now = &task[next++];
+	sprintf(max,"%d",max_sched_cnt);
+	strcat(tn,max);
 	startLog(tn);
 	while(kill_count < SIZE){
 		svc_t++;
@@ -67,7 +58,6 @@ void rr(int max_sched_cnt){
 			}
 		}
 	}
-	printf("\n");
-
+	endl();
 	endLog(tn);
 }

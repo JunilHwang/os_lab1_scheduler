@@ -33,7 +33,7 @@
  */
 
 void fifo(){
-	taskSet();
+	taskSet(); taskPrint();
 	char tn[] = "First in First out\0";
 	int i = 0,
 		killed_count = 0,
