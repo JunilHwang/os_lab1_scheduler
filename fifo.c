@@ -34,27 +34,28 @@
 
 void fifo(){
 	taskSet(); taskPrint();
-	char tn[] = "First in First out\0";
+	char tn[] = "First in First out\0",
+		 in[20];
 	int i = 0,
 		killed_count = 0,
 		svc_t = 0,
 		next = 0;
 	struct task_t *now = &task[next++];
 	startLog(tn);
-
+	printf("   ");
 	while(killed_count < SIZE){
-		svc_t++;
 		if(next<SIZE && task[next].arv <= svc_t){
 			q_put(&task[next++]);
 		}
 		printf("%c ",now->name);
+		in[svc_t] = now->name;
+		svc_t++;
 		if(--now->svc <= 0){
 			killed_count++;
 			now = q_pop();
 		}
 	}
-
-	printf("\n");
-
+	endl();
+	print_table(in);
 	endLog(tn);
 }

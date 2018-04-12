@@ -26,7 +26,8 @@
 #include "lab1_sched_types.h"
 void mlfq(){
 	taskSet();
-	char tn[] = "Multi Level Feedback Queue\0";
+	char tn[] = "Multi Level Feedback Queue\0",
+		 in[20];
 	int i = 0,
 		kill_count = 0,
 		svc_t = 0,
@@ -34,15 +35,16 @@ void mlfq(){
 	struct task_t *now = &task[next++];
 	startLog(tn);
 	q_put(now);
+	printf("  ");
 	while(kill_count < SIZE){
+		printf("%c ",now->name);
+		in[svc_t++] = now->name;
+		now->prt++;
 		if(next<SIZE && task[next].arv <= svc_t){
 			now = &task[next++];
 		} else {
 			now = q_pop();
 		}
-		svc_t++;
-		now->prt++;
-		printf("%c ",now->name);
 		if(--now->svc <= 0){
 			kill_count++;
 		} else {
@@ -50,6 +52,7 @@ void mlfq(){
 		}
 	}
 	endl();
+	print_table(in);
 	endLog(tn);
 }
 

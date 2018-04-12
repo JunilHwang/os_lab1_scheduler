@@ -31,7 +31,8 @@
  */
 
 void lottery(){
-	char tn[] = "Lottery\0";
+	char tn[] = "Lottery\0",
+		 in[20];
 	int i = 0,
 		kill_count = 0,
 		arv_cnt=1,
@@ -41,6 +42,7 @@ void lottery(){
 	startLog(tn);
 	srandom(time(NULL));
 	max = task[i].tk;
+	printf("  ");
 	while(kill_count < SIZE){
 		svc_t++;
 		win_number = random() % max;
@@ -50,6 +52,7 @@ void lottery(){
 			if(win_number < stack_tk){
 				if(task[i].svc == 0) continue;
 				printf("%c ",task[i].name);
+				in[svc_t-1] = task[i].name;
 				if(--task[i].svc<=0){
 					kill_count++;
 					max -= task[i].tk;
@@ -66,6 +69,7 @@ void lottery(){
 
 	}
 	endl();
+	print_table(in);
 	endLog(tn);
 
 }

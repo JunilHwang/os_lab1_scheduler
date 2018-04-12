@@ -27,8 +27,9 @@
 
 void rr(int max_sched_cnt){
 	taskSet();
-	char tn[20] = "Round Robin ",
-		 max[10];
+	char tn[30] = "Round Robin \0",
+		 max[1],
+		 in[20];
 	int i = 0,
 		kill_count = 0,
 		svc_t = 0,
@@ -38,14 +39,16 @@ void rr(int max_sched_cnt){
 	sprintf(max,"%d",max_sched_cnt);
 	strcat(tn,max);
 	startLog(tn);
+	printf("   ");
 	while(kill_count < SIZE){
 		svc_t++;
+
+		printf("%c ",now->name);
+		in[svc_t-1] = now->name;
 
 		if(next<SIZE && task[next].arv <= svc_t){
 			q_put(&task[next++]);
 		}
-
-		printf("%c ",now->name);
 		if(--now->svc <= 0){
 			kill_count++;
 			sched_cnt = 0;
@@ -59,5 +62,6 @@ void rr(int max_sched_cnt){
 		}
 	}
 	endl();
+	print_table(in);
 	endLog(tn);
 }

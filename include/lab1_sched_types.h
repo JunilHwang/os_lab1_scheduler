@@ -40,6 +40,7 @@ void startLog(char *);			// start log print
 void endLog(char *);			// end log print
 void endl();					// enter character
 void print_queue();				// queue print
+void print_table(char *);		// shceduling table print
 /* } default functions */
 
 /* scheduling functions { */

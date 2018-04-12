@@ -106,3 +106,21 @@ void taskPrint(){
 		printf("name : %c, arrival Time : %d, service Time : %d, priority : %d\n",task[i].name,task[i].arv,task[i].svc,task[i].prt);
 	}
 }
+
+
+// scheduling table print
+void print_table(char *arr){
+	int i=0,j,asize=0;
+	while(arr[asize]) asize++;
+	for(;i<SIZE;i++){
+		printf("%c ",task[i].name);
+		for(j=0;j<asize;j++){
+			if(task[i].name == arr[j]){
+				printf("■ ");
+			} else {
+				printf("□ ");
+			}
+		}
+		endl();
+	}
+}
