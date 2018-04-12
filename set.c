@@ -73,6 +73,7 @@ void q_put(struct task_t* task_one){
 // print queue
 void print_queue(){
 	int i=0;
+    endl();
 	for(;i<SIZE;i++){
 		if(queue[i] == NULL) continue;
 		printf("i:%d,name:%c,svc:%d\n",i,queue[i]->name,queue[i]->svc);
@@ -109,12 +110,11 @@ void taskPrint(){
 
 
 // scheduling table print
-void print_table(char *arr){
+void print_table(char arr[]){
 	int i=0,j,asize=0;
-	while(arr[asize]) asize++;
 	for(;i<SIZE;i++){
 		printf("%c ",task[i].name);
-		for(j=0;j<asize;j++){
+		for(j=0;j<20;j++){
 			if(task[i].name == arr[j]){
 				printf("■ ");
 			} else {

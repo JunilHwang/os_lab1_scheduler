@@ -40,12 +40,13 @@ void fifo(){
 		killed_count = 0,
 		svc_t = 0,
 		next = 0;
-	struct task_t *now = &task[next++];
+	struct task_t *now= &task[next++];
 	startLog(tn);
 	printf("   ");
 	while(killed_count < SIZE){
 		if(next<SIZE && task[next].arv <= svc_t){
-			q_put(&task[next++]);
+			q_put(&task[next]);
+            next++;
 		}
 		printf("%c ",now->name);
 		in[svc_t] = now->name;
