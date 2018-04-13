@@ -95,6 +95,8 @@ void taskSet(){
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];
 		task[i].prt = 0;
+		task[i].tat = 0; 
+		task[i].rst = 0;
 		task[i].tk  = svc[i]*100;
 	}
 
@@ -123,4 +125,26 @@ void print_table(char arr[]){
 		}
 		endl();
 	}
+}
+
+// print avrage turnarround time
+void print_avg_tat(){
+	int sum=0,i=0;
+	float avg;
+	for(;i<SIZE;i++){
+		sum += task[i].tat;
+	}
+	avg = (float)sum/avg;
+	printf("avrage turnarround time : %.3f\n",avg);
+}
+
+// print avrage response time
+void print_avg_rst(){
+	int sum=0,i=0;
+	float avg;
+	for(;i<SIZE;i++){
+		sum += task[i].rst;
+	}
+	avg = (float)sum/SIZE;
+	printf("avrage response time : %.2f\n",avg);
 }

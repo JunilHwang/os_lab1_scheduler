@@ -34,17 +34,17 @@ void mlfq(){
 		next = 0;
 	struct task_t *now = &task[next++];
 	startLog(tn);
-	q_put(now);
 	printf("  ");
+	q_put(now);
 	while(kill_count < SIZE){
-		printf("%c ",now->name);
-		in[svc_t++] = now->name;
-		now->prt++;
 		if(next<SIZE && task[next].arv <= svc_t){
 			now = &task[next++];
 		} else {
 			now = q_pop();
 		}
+		printf("%c ",now->name);
+		in[svc_t++] = now->name;
+		now->prt++;
 		if(--now->svc <= 0){
 			kill_count++;
 		} else {

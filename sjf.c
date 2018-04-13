@@ -33,7 +33,7 @@
  */
 
 void sjf(){
-	taskSet(); taskPrint();
+	taskSet();
 	char tn[] = "Shortest job first\0";
 	int	killed_count = 0,
 		svc_t = 0,

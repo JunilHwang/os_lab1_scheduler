@@ -17,7 +17,9 @@
 // struct of task
 struct task_t{
 	char name;	// process name
-	int arv,	// Arrival time
+	int tat,	// turnarround time
+		rst,	// response time
+		arv,	// Arrival time
 		svc,	// Service time
 		prt,	// Priority
 		tk;		// ticket
@@ -26,8 +28,8 @@ struct task_t{
 /* global variable { */
 struct task_t	*queue[SIZE],	// queue
 				task[SIZE];		// task
-int qt,	// queue top index
-	ql;	// queue last index
+int qt,		// queue top index
+	ql;		// queue last index
 /* } global variable */
 
 /* default functions {
@@ -41,6 +43,8 @@ void endLog(char *);			// end log print
 void endl();					// enter character
 void print_queue();				// queue print
 void print_table(char *);		// shceduling table print
+void print_avg_tat();			// print avrage turnarround time
+void print_avg_rst();			// print avrage response time
 /* } default functions */
 
 /* scheduling functions { */
@@ -48,7 +52,7 @@ void fifo();	// implement at fifo.c	first in first out
 void sjf();		// implement at sjf.c	shortest job first
 void rr(int);	// implement at rr.c	round robine
 void mlfq();	// implement at mlfq.c	Multi level feedback queue
-void lottery();	// implement at lottery.c 
+void lottery();	// implement at lottery.c
 /* } scheduling functions */
 
 
