@@ -53,9 +53,8 @@ void sortbysvc(){
 
 // SJF(Shortest Job First) Scheduling
 void sjf(){
-<<<<<<< HEAD
 	taskSet();
-	char tn[] = "Shortest job first\0";
+	char tn[] = "Shortest job first\0",
          in[20];
 	int	killed_count = 0,
 		svc_t = 0,
@@ -78,10 +77,13 @@ void sjf(){
         now->svc--;
 		if(now->svc == 0){
 			killed_count++;
+			now->tat = svc_t - now->arv;
 			now = q_pop();
+			if(now) now->rst = svc_t - now->arv;
 		}
     }
     endl();
     print_table(in);
+	print_performance();
 	endLog(tn);
 }

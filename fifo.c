@@ -53,12 +53,14 @@ void fifo(){
 		svc_t++;
 		if(--now->svc <= 0){
 			killed_count++;
+			now->tat = svc_t - now->arv;
 			now = q_pop();
-			if(now) now->rst = svc_t - now->arv;
+			if(now)
+				now->rst = svc_t - now->arv;
 		}
 	}
 	endl();
 	print_table(in);
-	print_avg_rst();
+	print_performance();
 	endLog(tn);
 }

@@ -12,7 +12,7 @@
 
 #ifndef _LAB1_HEADER_H
 #define _LAB1_HEADER_H
-#define SIZE 5	// process size
+#define SIZE 5		// process size
 
 // struct of task
 struct task_t{
@@ -43,8 +43,7 @@ void endLog(char *);			// end log print
 void endl();					// enter character
 void print_queue();				// queue print
 void print_table(char *);		// shceduling table print
-void print_avg_tat();			// print avrage turnarround time
-void print_avg_rst();			// print avrage response time
+void print_performance();		// print scheduling performance
 /* } default functions */
 
 /* scheduling functions { */

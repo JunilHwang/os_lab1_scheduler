@@ -51,22 +51,7 @@ struct task_t *q_pop(){
 
 // queue put
 void q_put(struct task_t* task_one){
-	int now=ql, prev;
-	struct task_t* temp;
 	queue[ql] = task_one;
-
-	// order by priority 
-	while(1){
-		prev = now-1;
-		if(prev < 0) now = SIZE-1;
-		if(!queue[prev] || queue[prev]->prt == queue[now]->prt || prev == qt) break;
-		if(queue[prev]->prt > queue[now]->prt){
-			temp = queue[now];
-			queue[now] = queue[prev];
-			queue[prev] = temp;
-		}
-		now = prev;
-	}
 	if(++ql >= SIZE) ql = 0;
 }
 
@@ -127,24 +112,22 @@ void print_table(char arr[]){
 	}
 }
 
-// print avrage turnarround time
-void print_avg_tat(){
-	int sum=0,i=0;
-	float avg;
+// print average value
+void print_performance(){
+	int sum_tat=0, sum_rst=0,
+		i=0;
+	float avg_tat, avg_rst;
 	for(;i<SIZE;i++){
-		sum += task[i].tat;
+		sum_tat += task[i].tat;
+		sum_rst += task[i].rst;
+		printf("[%c] ",task[i].name);
+		printf("turnaround %2d  ",task[i].tat);
+		printf("response %2d\n",task[i].rst);
 	}
-	avg = (float)sum/avg;
-	printf("avrage turnarround time : %.3f\n",avg);
-}
-
-// print avrage response time
-void print_avg_rst(){
-	int sum=0,i=0;
-	float avg;
-	for(;i<SIZE;i++){
-		sum += task[i].rst;
-	}
-	avg = (float)sum/SIZE;
-	printf("avrage response time : %.2f\n",avg);
+	avg_tat = (float)sum_tat/SIZE;
+	avg_rst = (float)sum_rst/SIZE;
+	printf("[turnaround] ");
+	printf("sum %2d, avg %.2f\n",sum_tat,avg_tat);
+	printf("[reponse]    ");
+	printf("sum %2d, avg %.2f\n",sum_rst,avg_rst);
 }

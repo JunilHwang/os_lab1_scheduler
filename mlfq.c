@@ -24,6 +24,29 @@
 #include <pthread.h>
 #include <asm/unistd.h>
 #include "lab1_sched_types.h"
+
+// sort by priority
+void sortByPrt(){
+	int now = ql-1,prev;
+	struct task_t *temp;
+	if(now < 0) now = SIZE-1;
+
+	// order by priority 
+	while(1){
+		prev = now-1;
+		if(prev < 0) now = SIZE-1;
+		if(!queue[prev] || queue[prev]->prt == queue[now]->prt || prev == qt) break;
+		if(queue[prev]->prt > queue[now]->prt){
+			temp = queue[now];
+			queue[now] = queue[prev];
+			queue[prev] = temp;
+		}
+		now = prev;
+	}
+
+}
+
+// multi level feedback queue
 void mlfq(){
 	taskSet();
 	char tn[] = "Multi Level Feedback Queue\0",
@@ -47,12 +70,15 @@ void mlfq(){
 		now->prt++;
 		if(--now->svc <= 0){
 			kill_count++;
+			now->tat = svc_t - now->arv;
 		} else {
 			q_put(now);
+			sortByPrt();
 		}
 	}
 	endl();
 	print_table(in);
+	print_performance();
 	endLog(tn);
 }
 

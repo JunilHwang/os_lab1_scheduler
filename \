@@ -47,7 +47,6 @@ void rr(int max_sched_cnt){
 		in[svc_t-1] = now->name;
 
 		if(next<SIZE && task[next].arv <= svc_t){
-			task[next].rst = -1;
 			q_put(&task[next++]);
 		}
 		if(--now->svc <= 0){
@@ -55,18 +54,18 @@ void rr(int max_sched_cnt){
 			now->tat = svc_t - now->arv;
 			sched_cnt = 0;
 			now = q_pop();
-			if(now && now->rst == -1) now->rst = svc_t - now->arv;
 		} else {
 			if(++sched_cnt >= max_sched_cnt){
 				sched_cnt = 0;
 				q_put(now);
 				now = q_pop();
-				if(now && now->rst == -1) now->rst = svc_t - now->arv;
+				if(now && now->rst != 0) now->rst = svc_t - now->arv;
 			}
 		}
 	}
 	endl();
 	print_table(in);
-	print_performance();
+	print_avg(0);
+	print_avg(1);
 	endLog(tn);
 }
