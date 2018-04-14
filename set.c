@@ -80,8 +80,8 @@ void taskSet(){
 		task[i].arv = arv[i];
 		task[i].svc = svc[i];
 		task[i].prt = 0;
-		task[i].tat = 0; 
-		task[i].rst = 0;
+		task[i].tat = -1; 
+		task[i].rst = -1;
 		task[i].tk  = svc[i]*100;
 	}
 

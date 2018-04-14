@@ -66,6 +66,7 @@ void mlfq(){
 			now = q_pop();
 		}
 		printf("%c ",now->name);
+		if(now && now->rst == -1) now->rst = svc_t - now->arv;
 		in[svc_t++] = now->name;
 		now->prt++;
 		if(--now->svc <= 0){

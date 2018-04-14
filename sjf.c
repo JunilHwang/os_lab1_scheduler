@@ -1,12 +1,10 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32161756
+*	    Student name : Yurim Park
 *
-*   lab1_sched.c :
-*       - Lab1 source file.
-*       - Must contains scueduler algorithm function'definition.
+*   sjf.c : implement of shortest job first
 *
 */
 
@@ -33,7 +31,7 @@
  */
 
 // sort by service time of queue
-void sortbysvc(){
+void sortByServicetime(){
     int now_idx, prev_idx;
     struct task_t *temp;
     now_idx = ql-1;
@@ -67,11 +65,13 @@ void sjf(){
         
 		if(next<SIZE && task[next].arv <= svc_t){
             q_put(&task[next]);
-            sortbysvc();
+            sortByServicetime();
             next++;
         }
         printf("%c ",now->name);
         in[svc_t] = now->name;
+        if(now && now->rst == -1)
+            now->rst = svc_t - now->arv;
         svc_t++;
 
         now->svc--;
@@ -79,7 +79,6 @@ void sjf(){
 			killed_count++;
 			now->tat = svc_t - now->arv;
 			now = q_pop();
-			if(now) now->rst = svc_t - now->arv;
 		}
     }
     endl();

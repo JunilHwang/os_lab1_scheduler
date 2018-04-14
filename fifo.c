@@ -46,17 +46,17 @@ void fifo(){
 	while(killed_count < SIZE){
 		if(next<SIZE && task[next].arv <= svc_t){
 			q_put(&task[next]);
-            next++;
+			next++;
 		}
 		printf("%c ",now->name);
 		in[svc_t] = now->name;
+		if(now && now->rst == -1)
+			now->rst = svc_t - now->arv;
 		svc_t++;
 		if(--now->svc <= 0){
 			killed_count++;
 			now->tat = svc_t - now->arv;
 			now = q_pop();
-			if(now)
-				now->rst = svc_t - now->arv;
 		}
 	}
 	endl();

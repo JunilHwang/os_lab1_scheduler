@@ -46,16 +46,20 @@ void lottery(){
 	while(kill_count < SIZE){
 		svc_t++;
 		win_number = random() % max;
-		//printf("\nmax:%d,win:%d,",max,win_number);
 		for(i=stack_tk=0;i<arv_cnt;i++){
 			if(task[i].svc>0) stack_tk += task[i].tk;
 			if(win_number < stack_tk){
 				if(task[i].svc == 0) continue;
 				printf("%c ",task[i].name);
+				if(task[i].rst == -1)
+					task[i].rst = svc_t - task[i].arv -1;
 				in[svc_t-1] = task[i].name;
+				if(task[i].rst == -1)
+					task[i].rst == svc_t - task[i].arv;
 				if(--task[i].svc<=0){
 					kill_count++;
 					max -= task[i].tk;
+					task[i].tat = svc_t - task[i].arv;
 				}
 				break;
 			}
@@ -70,6 +74,6 @@ void lottery(){
 	}
 	endl();
 	print_table(in);
+	print_performance();
 	endLog(tn);
-
 }

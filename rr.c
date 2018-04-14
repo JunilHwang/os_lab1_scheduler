@@ -41,13 +41,13 @@ void rr(int max_sched_cnt){
 	startLog(tn);
 	printf("   ");
 	while(kill_count < SIZE){
-		svc_t++;
 
 		printf("%c ",now->name);
-		in[svc_t-1] = now->name;
+		in[svc_t] = now->name;
+		if(now && now->rst == -1) now->rst = svc_t - now->arv;
+		svc_t++;
 
 		if(next<SIZE && task[next].arv <= svc_t){
-			task[next].rst = -1;
 			q_put(&task[next++]);
 		}
 		if(--now->svc <= 0){
@@ -55,13 +55,11 @@ void rr(int max_sched_cnt){
 			now->tat = svc_t - now->arv;
 			sched_cnt = 0;
 			now = q_pop();
-			if(now && now->rst == -1) now->rst = svc_t - now->arv;
 		} else {
 			if(++sched_cnt >= max_sched_cnt){
 				sched_cnt = 0;
 				q_put(now);
 				now = q_pop();
-				if(now && now->rst == -1) now->rst = svc_t - now->arv;
 			}
 		}
 	}
