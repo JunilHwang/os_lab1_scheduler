@@ -1,12 +1,10 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32151839
+*	    Student name : Eunyoung Park
 *
-*   lab1_sched.c :
-*       - Lab1 source file.
-*       - Must contains scueduler algorithm function'definition.
+*   fifo.c : implement of first in first out 
 *
 */
 
@@ -25,42 +23,38 @@
 #include <assert.h>
 #include <pthread.h>
 #include <asm/unistd.h>
-
 #include "lab1_sched_types.h"
 
-/*
- * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
- */
-
 void fifo(){
-	taskSet(); taskPrint();
-	char tn[] = "First in First out\0",
-		 in[20];
-	int i = 0,
-		killed_count = 0,
-		svc_t = 0,
-		next = 0;
-	struct task_t *now= &task[next++];
+	taskSet();		// task variable initialize
+	taskPrint();		// task status print
+	char tn[] = "First in First out\0",	// task name
+		 in[20];		// for scheduling print
+	int killed_count = 0,		// killed task count
+		svc_t = 0,			// for service time increase
+		next = 0;			// next task index
+	struct task_t *now= &task[next++];	 // now task
 	startLog(tn);
 	printf("   ");
 	while(killed_count < SIZE){
-		if(next<SIZE && task[next].arv <= svc_t){
+		// arrival time same service time than next task put queue
+		while(next<SIZE && task[next].arv == svc_t){
 			q_put(&task[next]);
 			next++;
 		}
-		printf("%c ",now->name);
-		in[svc_t] = now->name;
-		if(now && now->rst == -1)
+		printf("%c ",now->name);	// now process name print
+		in[svc_t] = now->name;	// store present process name put for print table
+		if(now && now->rst == -1)	// response time check
 			now->rst = svc_t - now->arv;
-		svc_t++;
-		if(--now->svc <= 0){
+		svc_t++;		// service time increament
+		if(--now->svc <= 0){	// task kill and next task pop
 			killed_count++;
 			now->tat = svc_t - now->arv;
 			now = q_pop();
 		}
 	}
 	endl();
-	print_table(in);
-	print_performance();
+	print_table(in);		// print task scheduling table
+	print_performance();	// print scheduling performance ( turnaround time, response time )
 	endLog(tn);
 }
