@@ -32,57 +32,55 @@
 
 // sort by service time of queue
 void sortByServicetime(){
-    int now_idx, prev_idx;
-    struct task_t *temp;
-    now_idx = ql-1;
-    if(now_idx < 0) now_idx = SIZE-1;
+    int now, prev;           // for now and previous index
+    struct task_t *temp;    // for now and previous exchange
+    now = ql == 0 ? SIZE-1 : ql-1; // queue index last put
     while(1){
-        prev_idx = now_idx-1;
-        if(prev_idx < 0) prev_idx = SIZE-1;
-        if(!queue[prev_idx] || queue[prev_idx]->svc < queue[now_idx]->svc) break;
-        if(queue[prev_idx]->svc > queue[now_idx]->svc || (queue[prev_idx]->svc == queue[now_idx]->svc && queue[prev_idx]->name > queue[now_idx]->name)){
-            temp = queue[now_idx];
-            queue[now_idx] = queue[prev_idx];
-            queue[prev_idx] = temp;
+        prev = now == 0 ? SIZE-1 : now-1;   // previous index
+        if(!queue[prev] || queue[prev]->svc < queue[now]->svc) break;   // sorted complete
+        if(queue[prev]->svc >  queue[now]->svc ||   // sorted
+            (queue[prev]->svc == queue[now]->svc && queue[prev]->name > queue[now]->name)){
+            temp = queue[now];
+            queue[now] = queue[prev];
+            queue[prev] = temp;
         }
-        now_idx = prev_idx;
+        now = prev;
     }
 }
 
 // SJF(Shortest Job First) Scheduling
 void sjf(){
-	taskSet();
-	char tn[] = "Shortest job first\0",
-         in[20];
-	int	killed_count = 0,
-		svc_t = 0,
-		next = 0;
-    int i,now_idx,prev_idx; //control variable
-	struct task_t *now= &task[next++];
-	startLog(tn);
+    taskSet();  // task initialize
+    char tn[] = "Shortest job first\0", // function name
+         in[20];    // for scheduling result print
+    int	killed_count = 0, // killed task count
+		svc_t = 0,         // for service time increase
+		next = 0;          // next 
+    struct task_t *now= &task[next++];  // now task
+    startLog(tn);
     printf("  ");
 	while(killed_count < SIZE){
-        
-		if(next<SIZE && task[next].arv <= svc_t){
+        // service time same next task arrival time
+        // than put next task
+        // than sort by service time
+        while(next<SIZE && task[next].arv == svc_t){
             q_put(&task[next]);
             sortByServicetime();
             next++;
         }
-        printf("%c ",now->name);
+        printf("%c ",now->name);    // print now task
         in[svc_t] = now->name;
-        if(now && now->rst == -1)
+        if(now && now->rst == -1)   // response time check
             now->rst = svc_t - now->arv;
-        svc_t++;
-
-        now->svc--;
-		if(now->svc == 0){
-			killed_count++;
-			now->tat = svc_t - now->arv;
-			now = q_pop();
-		}
+        svc_t++;    // service time increment
+        if(--now->svc == 0){
+            killed_count++; // kill task
+            now->tat = svc_t - now->arv; // turnarround time check
+            now = q_pop();  // next task pop
+        }
     }
     endl();
-    print_table(in);
-	print_performance();
-	endLog(tn);
+    print_table(in);    // print scheduling result table
+    print_performance(); // print scheduling  performance
+    endLog(tn);
 }
