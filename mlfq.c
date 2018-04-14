@@ -82,4 +82,3 @@ void mlfq(){
 	print_performance();
 	endLog(tn);
 }
-

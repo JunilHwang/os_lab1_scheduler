@@ -61,7 +61,7 @@ void print_queue(){
     endl();
 	for(;i<SIZE;i++){
 		if(queue[i] == NULL) continue;
-		printf("i:%d,name:%c,svc:%d\n",i,queue[i]->name,queue[i]->svc);
+		printf("i:%d,name:%c,svc:%d,prt:%d\n",i,queue[i]->name,queue[i]->svc,queue[i]->prt);
 	}
 	printf("top:%d, last:%d\n",qt,ql);
 	endl();
